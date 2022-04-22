@@ -83,19 +83,25 @@ function createGameArea(boxNumber){
     const boxEr = createBoxElement(boxNumber, htmlElement);
     boxEr.innerHTML = `<span>${i}</span>`;
     boxEr.iD = i;
+    
     //evento click
-    boxEr.addEventListener('click', function(){
-      if(bombList.includes(boxEr.iD)){
-        console.log('trovato!');
-      }else{
-        this.classList.add('check');
-      }
-       
-    })
+    checkBomb( bombList, boxEr );
   }
 }
 
-//
+//Function bomba
+
+function checkBomb( bombList, boxEr ){
+  boxEr.addEventListener('click', function(){
+
+    if(bombList.includes(boxEr.iD)){
+      this.classList.add('bomb');
+      boxEr.innerHTML = 'Boom!';
+    }else{
+      this.classList.add('check');
+    }
+  });
+}
 
 
 

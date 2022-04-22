@@ -65,6 +65,15 @@ footer{
   background-color: aquamarine;
 }
 
+.sd-box.bomb{
+  background-color: brown;
+  color: aliceblue;
+}
+
+.sd-box:active{
+  transform: scale(1.4);
+}
+
 .sd-box.easy{
   width: calc( 600px / 7);
   height: calc( 600px / 7);
@@ -88,5 +97,7 @@ footer{
 .sd-box.check p{
   display: block;
 }
+
+
 
 
