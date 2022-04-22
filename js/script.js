@@ -1,16 +1,18 @@
-// **** viene generata una griglia di gioco quadrata, in cui ogni cella contiene un numero tra quelli compresi in un range:
-
-// Il computer deve generare 16 numeri ( univoci nella lista )casuali = per ogni livello di difficoltà;
-
-// In seguito l’utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina, altrimenti la cella cliccata si colora di azzurro e l’utente può continuare a cliccare sulle altre celle.
 // La partita termina quando il giocatore clicca su una bomba o raggiunge il numero massimo possibile di numeri consentiti.
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba.
-
+// **BONUS:**
+// 1- quando si clicca su una bomba e finisce la partita, evitare che si possa cliccare su altre celle
+// ****2- quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste
+// **Consigli del giorno:** :party_wizard:
+// ****Scriviamo prima cosa vogliamo fare passo passo in italiano, dividiamo il lavoro in micro problemi.
+// Ad esempio:
 
 const totBomb = 16;
 let clickCounter = 0;
-const magazzinoBomb =[];
+let magazzinoBomb =[];
 
+const layoverMessage = document.querySelector('.end-message');
+console.log(layoverMessage);
 const main = document.getElementById('sd-main');
 
 document.getElementById('btn-start').addEventListener( 'click', initGame );
@@ -18,6 +20,7 @@ document.getElementById('btn-start').addEventListener( 'click', initGame );
 function initGame(){
 
   main.innerHTML = '';
+  magazzinoBomb =[];
 
   const levelChoice = document.getElementById('level-choice').value;
   const level = [100, 81, 49];
@@ -37,7 +40,6 @@ function createGameArea(boxNumber){
 
   //richiamo qui la funzione boxPrinter
   boxPrinter(boxNumber, gameArea);
-
   return gameArea;
 }
 
@@ -84,7 +86,7 @@ function createGameArea(boxNumber){
     boxEr.iD = i;
 
     //richiamo qui la funzione click/bomb;
-    checkBomb( bombList, boxEr );
+    checkBomb( bombList, boxEr , htmlElement );
   }
 }
 
@@ -93,21 +95,30 @@ function createGameArea(boxNumber){
 
 
 //funzione CLICK/BOMB
-function checkBomb( bombList, boxEr ){
+function checkBomb( bombList, boxEr , htmlElement){
 
 
   boxEr.addEventListener('click', function(){
-
+    //click counter
     clickCounter ++;
+
     console.log(clickCounter);
 
     if(bombList.includes(boxEr.iD)){
       this.classList.add('bomb');
       boxEr.innerHTML = 'Boom!';
+      endGame(htmlElement);
+
     }else{
       this.classList.add('check');
     }
   });
+}
+
+
+//END GAME FUNCTION
+function endGame(htmlElement){
+  htmlElement.classList.add('pe-none');
 }
 
 
@@ -140,3 +151,4 @@ function uniqueRandomNum( number, boxNumber ){
 function randomNum( min , max ){
   return Math.floor(Math.random() * (max - min +1) + min);
 }
+

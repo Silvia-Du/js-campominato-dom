@@ -59,6 +59,7 @@ footer{
   background-color: aliceblue;
   border: 2px solid cadetblue;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 .sd-box.check{
@@ -74,30 +75,18 @@ footer{
   transform: scale(1.4);
 }
 
-.sd-box.easy{
-  width: calc( 600px / 7);
-  height: calc( 600px / 7);
-  
-}
-
-.sd-box.hard{
-  width: calc( 600px / 9);
-  height: calc( 600px / 9);
-}
-
-.sd-box.crazy{
-  width: calc( 600px / 10);
-  height: calc( 600px / 10);
-}
-
-.sd-box span{
+.end-message{
+  width: 600px;
+  height: 250px;
+  position: absolute;
+  z-index: 999;
+  background-color: rgba(165, 42, 42, 0.623);
   /* display: none; */
 }
 
-.sd-box.check p{
+
+.block{
   display: block;
 }
-
-
 
 
