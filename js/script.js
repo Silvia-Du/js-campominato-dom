@@ -74,20 +74,24 @@ function createGameArea(boxNumber){
  */
  function boxPrinter(boxNumber, htmlElement){
   
+  //const bomb = uniqueRandomNum( totBomb, boxNumber );
+
   for( let i = 1; i <= boxNumber; i++ ){
     
     //richiamo qui la funz creaBox
     const boxEr = createBoxElement(boxNumber, htmlElement);
     boxEr.innerHTML = `<span>${i}</span>`;
-
-    console.log(boxEr);
+    boxEr.iD = i;
     //evento click
     boxEr.addEventListener('click', function(){
       this.classList.add('check');
+      console.log(boxEr.iD);
 
     })
   }
 }
+
+//
 
 
 
