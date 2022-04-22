@@ -3,13 +3,17 @@
 // **BONUS:**
 // 1- quando si clicca su una bomba e finisce la partita, evitare che si possa cliccare su altre celle
 // ****2- quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste
-// **Consigli del giorno:** :party_wizard:
+
 // ****Scriviamo prima cosa vogliamo fare passo passo in italiano, dividiamo il lavoro in micro problemi.
 // Ad esempio:
+
+//cliccando su una bomba,  accendere i dannati box, tutte le bombe, tutti gli altri azzurri;
+
 
 const totBomb = 16;
 let clickCounter = 0;
 let magazzinoBomb =[];
+let magazinoBox = [];
 
 const layoverMessage = document.querySelector('.end-message');
 console.log(layoverMessage);
@@ -76,7 +80,6 @@ function createGameArea(boxNumber){
  function boxPrinter(boxNumber, htmlElement){
   
   const bombList = uniqueRandomNum( totBomb, boxNumber );
-  console.log(bombList);
 
   for( let i = 1; i <= boxNumber; i++ ){
     
@@ -84,13 +87,18 @@ function createGameArea(boxNumber){
     const boxEr = createBoxElement(boxNumber, htmlElement);
     boxEr.innerHTML = `<span>${i}</span>`;
     boxEr.iD = i;
+    magazinoBox.push(boxEr.iD);
 
     //richiamo qui la funzione click/bomb;
     checkBomb( bombList, boxEr , htmlElement );
   }
+  console.log('magazino----->',magazinoBox);
+  console.log('magazion bombe ',bombList);
+
 }
 
 //
+
 
 
 
@@ -101,13 +109,13 @@ function checkBomb( bombList, boxEr , htmlElement){
   boxEr.addEventListener('click', function(){
     //click counter
     clickCounter ++;
-
     console.log(clickCounter);
 
     if(bombList.includes(boxEr.iD)){
+
       this.classList.add('bomb');
       boxEr.innerHTML = 'Boom!';
-      endGame(htmlElement);
+      endGame(htmlElement , boxEr , bombList);
 
     }else{
       this.classList.add('check');
@@ -117,8 +125,19 @@ function checkBomb( bombList, boxEr , htmlElement){
 
 
 //END GAME FUNCTION
-function endGame(htmlElement){
+function endGame(htmlElement, boxEr , bombList){
   htmlElement.classList.add('pe-none');
+  
+  if(bombList.includes(boxEr.iD)){
+    boxEr.classList.add('bomb');
+    console.log('rossi', boxEr);
+  }else{
+    boxEr.classList.add('check');
+    console.log('azzurri', boxEr);
+  }
+  
+
+
 }
 
 
