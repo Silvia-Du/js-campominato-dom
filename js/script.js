@@ -74,7 +74,8 @@ function createGameArea(boxNumber){
  */
  function boxPrinter(boxNumber, htmlElement){
   
-  //const bomb = uniqueRandomNum( totBomb, boxNumber );
+  const bombList = uniqueRandomNum( totBomb, boxNumber );
+  console.log(bombList);
 
   for( let i = 1; i <= boxNumber; i++ ){
     
@@ -84,9 +85,12 @@ function createGameArea(boxNumber){
     boxEr.iD = i;
     //evento click
     boxEr.addEventListener('click', function(){
-      this.classList.add('check');
-      console.log(boxEr.iD);
-
+      if(bombList.includes(boxEr.iD)){
+        console.log('trovato!');
+      }else{
+        this.classList.add('check');
+      }
+       
     })
   }
 }
