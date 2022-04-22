@@ -7,13 +7,12 @@
 
 .sd-header{
   height: 90px;
-  position: fixed;
   background-color: aliceblue;
 }
 
 
-.sd-main{
-  height: calc( 100vh - 100px);
+#sd-main{
+  height: calc( 100vh - 190px);
   background-color: cadetblue;
 }
 
@@ -40,7 +39,7 @@ footer{
  max-width: 300px;
 }
 
-#sd-game-area{
+.sd-game-area{
   width: 600px;
   height: 600px;
   display: flex;
