@@ -1,13 +1,14 @@
 // **** viene generata una griglia di gioco quadrata, in cui ogni cella contiene un numero tra quelli compresi in un range:
 
-// Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
-// I numeri nella lista delle bombe non possono essere duplicati.
+// Il computer deve generare 16 numeri ( univoci nella lista )casuali = per ogni livello di difficoltà;
+
 // In seguito l’utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina, altrimenti la cella cliccata si colora di azzurro e l’utente può continuare a cliccare sulle altre celle.
 // La partita termina quando il giocatore clicca su una bomba o raggiunge il numero massimo possibile di numeri consentiti.
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba.
 
 
 const totBomb = 16;
+let clickCounter = 0;
 const magazzinoBomb =[];
 
 const main = document.getElementById('sd-main');
@@ -23,8 +24,6 @@ function initGame(){
   const boxNumber = level[levelChoice];
 
   createGameArea(boxNumber);
-
-  // uniqueRandomNum( totBomb, boxNumber );
 
 }
 
@@ -83,16 +82,24 @@ function createGameArea(boxNumber){
     const boxEr = createBoxElement(boxNumber, htmlElement);
     boxEr.innerHTML = `<span>${i}</span>`;
     boxEr.iD = i;
-    
-    //evento click
+
+    //richiamo qui la funzione click/bomb;
     checkBomb( bombList, boxEr );
   }
 }
 
-//Function bomba
+//
 
+
+
+//funzione CLICK/BOMB
 function checkBomb( bombList, boxEr ){
+
+
   boxEr.addEventListener('click', function(){
+
+    clickCounter ++;
+    console.log(clickCounter);
 
     if(bombList.includes(boxEr.iD)){
       this.classList.add('bomb');
@@ -104,11 +111,10 @@ function checkBomb( bombList, boxEr ){
 }
 
 
-
+//generatore numero univoco
 let estractNumber;
 let selected;
 
-//generatore numero univoco
 function uniqueRandomNum( number, boxNumber ){
 
   for( let i = 0; i< number; i++ ){
