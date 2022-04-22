@@ -1,0 +1,93 @@
+
+.debug{
+  background-color: rgba(165, 42, 42, 0.39);
+  border: 1px solid black;
+}
+
+
+.sd-header{
+  height: 90px;
+  position: fixed;
+  background-color: aliceblue;
+}
+
+
+.sd-main{
+  height: calc( 100vh - 100px);
+  background-color: cadetblue;
+}
+
+footer{
+  height: 100px;
+  background-color: aliceblue;
+}
+
+.sd-footer{
+  height: 100%;
+}
+
+.sd-header .row{
+  height: 100%;
+}
+
+.sd-header .row label{
+  line-height: 35px;
+}
+
+
+
+.sd-form{
+ max-width: 300px;
+}
+
+#sd-game-area{
+  width: 600px;
+  height: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  border-radius: 10px;
+  background-color:rgb(43, 43, 95);
+}
+
+.sd-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: blueviolet;
+  font-weight: bold;
+  font-size: 1.3rem;
+  background-color: aliceblue;
+  border: 2px solid cadetblue;
+  border-radius: 15px;
+}
+
+.sd-box.check{
+  background-color: aquamarine;
+}
+
+.sd-box.easy{
+  width: calc( 600px / 7);
+  height: calc( 600px / 7);
+  
+}
+
+.sd-box.hard{
+  width: calc( 600px / 9);
+  height: calc( 600px / 9);
+}
+
+.sd-box.crazy{
+  width: calc( 600px / 10);
+  height: calc( 600px / 10);
+}
+
+.sd-box span{
+  /* display: none; */
+}
+
+.sd-box.check p{
+  display: block;
+}
+
+
