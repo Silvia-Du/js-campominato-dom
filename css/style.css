@@ -14,6 +14,7 @@
 #sd-main{
   min-height: calc( 100vh - 240px);
   background-color: cadetblue;
+  position: relative;
 }
 
 footer{
@@ -44,7 +45,7 @@ footer{
   height: 600px;
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
+  align-items: flex-start;
   border-radius: 10px;
   background-color:rgb(43, 43, 95);
 }
@@ -55,7 +56,7 @@ footer{
   align-items: center;
   color: blueviolet;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background-color: aliceblue;
   border: 2px solid cadetblue;
   border-radius: 15px;
@@ -63,12 +64,16 @@ footer{
 }
 
 .sd-box.check{
-  background-color: aquamarine;
+  background-color:darkseagreen;
 }
 
 .sd-box.bomb{
-  background-color: brown;
-  color: aliceblue;
+  background-color: rgb(241, 137, 0);
+  color: rgb(218, 15, 123);
+  background-image: url(../img-bomb.png);
+  background-size: cover;
+  background-position: center;
+  
 }
 
 .sd-box:active{
@@ -76,13 +81,15 @@ footer{
 }
 
 .end-message{
-  width: 600px;
+  width: 80%;
   height: 250px;
-  position: absolute;
-  z-index: 999;
   border-radius: 20px;
-  background-color: rgba(165, 42, 42, 0.747);
-  /* display: none; */
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(219, 112, 11, 0.795);
 }
 
 

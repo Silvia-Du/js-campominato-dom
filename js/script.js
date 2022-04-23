@@ -1,14 +1,9 @@
 
-// ****2- quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste
-
-//cliccando su una bomba,  accendere i dannati box, tutte le bombe;
-
-
 const totBomb = 16;
 let clickCounter = 0;
-let magazzinoBomb =[];
+let containerBombNum =[];
+let elementBombList = [];
 
-const layoverMessage = document.querySelector('.end-message');
 const outputMessage = document.getElementById('output-counter');
 const main = document.getElementById('sd-main');
 
@@ -19,7 +14,7 @@ document.getElementById('btn-start').addEventListener( 'click', initGame );
 function initGame(){
 
   main.innerHTML = '';
-  magazzinoBomb =[];
+  containerBombNum =[];
   clickCounter = 0;
 
   const levelChoice = document.getElementById('level-choice').value;
@@ -75,7 +70,7 @@ function createGameArea(boxNumber){
  */
  function boxPrinter(boxNumber, htmlElement){
   
-  const bombList = uniqueRandomNum( totBomb, boxNumber ); //questo è un'array
+  const bombList = uniqueRandomNum( totBomb, boxNumber );//array bomb number
 
   for( let i = 1; i <= boxNumber; i++ ){
     
@@ -86,6 +81,10 @@ function createGameArea(boxNumber){
 
     //richiamo qui la funzione click/bomb;
     checkBomb( bombList, boxEr , htmlElement );
+
+    if(bombList.includes(boxEr.iD)){
+      elementBombList.push(boxEr);
+    }
   }
 
   console.log('magazion bombe ',bombList);
@@ -103,22 +102,27 @@ function checkBomb(bombList, boxEr, htmlElement ){
     clickCounter ++;
     console.log( clickCounter) ;
 
-    endGame(bombList, boxEr, htmlElement);
+    endGame(bombList, boxEr, htmlElement, clickCounter);
   });
 
 }
 
 
 //END GAME FUNCTION
-function endGame(bombList, boxEr, htmlElement){
+function endGame(bombList, boxEr, htmlElement, clickCounter){
   
   if(bombList.includes(boxEr.iD)){
 
-    boxEr.classList.add('bomb');
-    boxEr.innerHTML = 'Boom!';
+    creaLayover( clickCounter );
+
     htmlElement.classList.add('pe-none');
-    layoverMessage.classList.add('block');
-    outputMessage.innerHTML = `Hai perso con ${clickCounter} click!!!`
+
+    for(let i = 0; i < elementBombList.length ; i++ ){
+      elementBombList[i].classList.add('bomb');
+      elementBombList[i].innerHTML = 'Boom!';
+
+    }
+
   }else{
 
     boxEr.classList.add('check');
@@ -139,15 +143,15 @@ function uniqueRandomNum( number, boxNumber ){
     while(!check){
       estractNumber = randomNum(1, boxNumber);
 
-      if(!magazzinoBomb.includes(estractNumber)){
+      if(!containerBombNum.includes(estractNumber)){
         check = true;
-        magazzinoBomb.push(estractNumber);
+        containerBombNum.push(estractNumber);
         selected = estractNumber;
       }
     }
   
   }
-  return magazzinoBomb;
+  return containerBombNum;
 
 }
 
@@ -159,3 +163,19 @@ function randomNum( min , max ){
 
 // var audio = new Audio('sound/lose.wav');   audio.play();
 
+//creo layover end message
+function creaLayover( clickCounter ){
+
+    const layOver = document.createElement('div');
+    layOver.className = 'end-message';
+    main.append(layOver);
+
+    if(clickCounter < 3){
+      layOver.innerHTML = `<h3>Hai perso con solo  ${clickCounter - 1}  click! riprova!<br>...un po sfigatello eh</h3> `;
+    }else{
+      layOver.innerHTML = `<h3>Hai perso con ${clickCounter - 1} click! riprova!</h3> `;
+    }
+    
+
+    return layOver;
+}
