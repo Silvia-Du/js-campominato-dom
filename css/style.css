@@ -1,29 +1,8 @@
 
-.debug{
-  background-color: rgba(165, 42, 42, 0.39);
-  border: 1px solid black;
-}
-
-
+/* header */
 .sd-header{
   height: 90px;
   background-color: aliceblue;
-}
-
-
-#sd-main{
-  min-height: calc( 100vh - 240px);
-  background-color: cadetblue;
-  position: relative;
-}
-
-footer{
-  height: 100px;
-  background-color: aliceblue;
-}
-
-.sd-footer{
-  height: 100%;
 }
 
 .sd-header .row{
@@ -34,10 +13,17 @@ footer{
   line-height: 35px;
 }
 
+.sd-header img{
+  width: 80px;
+}
 
 
-.sd-form{
- max-width: 300px;
+/* main */
+#sd-main{
+  min-height: calc( 100vh - 240px);
+  background-color: cadetblue;
+  position: relative;
+  color: aliceblue;
 }
 
 .sd-game-area{
@@ -76,10 +62,6 @@ footer{
   
 }
 
-.sd-box:active{
-  transform: scale(1.4);
-}
-
 .end-message{
   width: 80%;
   height: 250px;
@@ -92,9 +74,30 @@ footer{
   background-color: rgba(219, 112, 11, 0.795);
 }
 
-
-.block{
-  display: block;
+/* footer */
+footer{
+  height: 100px;
+  background-color: aliceblue;
 }
 
+.sd-footer{
+  height: 100%;
+}
+
+/* instruction */
+.sd-box:active{
+  transform: scale(1.4);
+}
+
+footer h3::after{
+  content: ' ';
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  vertical-align: middle;
+  background-image: url(../img-bomb.png);
+  background-position: center;
+  background-size: cover;
+}
 

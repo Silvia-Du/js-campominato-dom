@@ -6,6 +6,7 @@ let elementBombList = [];
 
 const outputMessage = document.getElementById('output-counter');
 const main = document.getElementById('sd-main');
+const btnStart = document.getElementById('btn-start');
 
 //al click inizia il gioco
 document.getElementById('btn-start').addEventListener( 'click', initGame );
@@ -80,7 +81,7 @@ function createGameArea(boxNumber){
     boxEr.iD = i;
 
     //richiamo qui la funzione click/bomb;
-    checkBomb( bombList, boxEr , htmlElement );
+    checkBomb( bombList, boxEr , htmlElement , boxNumber );
 
     if(bombList.includes(boxEr.iD)){
       elementBombList.push(boxEr);
@@ -95,27 +96,29 @@ function createGameArea(boxNumber){
 
 
 //funzione CLICK/BOMB
-function checkBomb(bombList, boxEr, htmlElement ){
+function checkBomb(bombList, boxEr, htmlElement, boxNumber ){
 
   boxEr.addEventListener('click', function(){
     //click counter
     clickCounter ++;
     console.log( clickCounter) ;
 
-    endGame(bombList, boxEr, htmlElement, clickCounter);
+    endGame(bombList, boxEr, htmlElement, clickCounter , boxNumber);
   });
 
 }
 
 
 //END GAME FUNCTION
-function endGame(bombList, boxEr, htmlElement, clickCounter){
-  
-  if(bombList.includes(boxEr.iD)){
+function endGame(bombList, boxEr, htmlElement, clickCounter, boxNumber){
 
-    creaLayover( clickCounter );
+   if(bombList.includes(boxEr.iD)){
+
+    creaLayover( clickCounter , boxNumber );
 
     htmlElement.classList.add('pe-none');
+
+    btnStart.innerHTML = 'Ritenta!'
 
     for(let i = 0; i < elementBombList.length ; i++ ){
       elementBombList[i].classList.add('bomb');
@@ -126,6 +129,10 @@ function endGame(bombList, boxEr, htmlElement, clickCounter){
   }else{
 
     boxEr.classList.add('check');
+
+    if(clickCounter > boxNumber){
+      creaLayover( clickCounter , boxNumber );
+    }
   }
 
 }
@@ -164,7 +171,7 @@ function randomNum( min , max ){
 // var audio = new Audio('sound/lose.wav');   audio.play();
 
 //creo layover end message
-function creaLayover( clickCounter ){
+function creaLayover( clickCounter , boxNumber){
 
     const layOver = document.createElement('div');
     layOver.className = 'end-message';
@@ -172,6 +179,8 @@ function creaLayover( clickCounter ){
 
     if(clickCounter < 3){
       layOver.innerHTML = `<h3>Hai perso con solo  ${clickCounter - 1}  click! riprova!<br>...un po sfigatello eh</h3> `;
+    }else if(clickCounter > boxNumber / 3){
+      layOver.innerHTML = `<h3>Hai vinto con  ${clickCounter - 1}  click! riprova!<br>batti il tuo record! `;
     }else{
       layOver.innerHTML = `<h3>Hai perso con ${clickCounter - 1} click! riprova!</h3> `;
     }
