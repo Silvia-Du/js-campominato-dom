@@ -1,30 +1,26 @@
-// La partita termina quando il giocatore clicca su una bomba o raggiunge il numero massimo possibile di numeri consentiti.
-// Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba.
-// **BONUS:**
-// 1- quando si clicca su una bomba e finisce la partita, evitare che si possa cliccare su altre celle
+
 // ****2- quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste
 
-// ****Scriviamo prima cosa vogliamo fare passo passo in italiano, dividiamo il lavoro in micro problemi.
-// Ad esempio:
-
-//cliccando su una bomba,  accendere i dannati box, tutte le bombe, tutti gli altri azzurri;
+//cliccando su una bomba,  accendere i dannati box, tutte le bombe;
 
 
 const totBomb = 16;
 let clickCounter = 0;
 let magazzinoBomb =[];
-let magazinoBox = [];
 
 const layoverMessage = document.querySelector('.end-message');
-console.log(layoverMessage);
+const outputMessage = document.getElementById('output-counter');
 const main = document.getElementById('sd-main');
 
+//al click inizia il gioco
 document.getElementById('btn-start').addEventListener( 'click', initGame );
 
+//FUNZIONE DI INIZIO GIOCO
 function initGame(){
 
   main.innerHTML = '';
   magazzinoBomb =[];
+  clickCounter = 0;
 
   const levelChoice = document.getElementById('level-choice').value;
   const level = [100, 81, 49];
@@ -79,7 +75,7 @@ function createGameArea(boxNumber){
  */
  function boxPrinter(boxNumber, htmlElement){
   
-  const bombList = uniqueRandomNum( totBomb, boxNumber );
+  const bombList = uniqueRandomNum( totBomb, boxNumber ); //questo è un'array
 
   for( let i = 1; i <= boxNumber; i++ ){
     
@@ -87,12 +83,11 @@ function createGameArea(boxNumber){
     const boxEr = createBoxElement(boxNumber, htmlElement);
     boxEr.innerHTML = `<span>${i}</span>`;
     boxEr.iD = i;
-    magazinoBox.push(boxEr.iD);
 
     //richiamo qui la funzione click/bomb;
     checkBomb( bombList, boxEr , htmlElement );
   }
-  console.log('magazino----->',magazinoBox);
+
   console.log('magazion bombe ',bombList);
 
 }
@@ -100,43 +95,34 @@ function createGameArea(boxNumber){
 //
 
 
-
-
 //funzione CLICK/BOMB
-function checkBomb( bombList, boxEr , htmlElement){
-
+function checkBomb(bombList, boxEr, htmlElement ){
 
   boxEr.addEventListener('click', function(){
     //click counter
     clickCounter ++;
-    console.log(clickCounter);
+    console.log( clickCounter) ;
 
-    if(bombList.includes(boxEr.iD)){
-
-      this.classList.add('bomb');
-      boxEr.innerHTML = 'Boom!';
-      endGame(htmlElement , boxEr , bombList);
-
-    }else{
-      this.classList.add('check');
-    }
+    endGame(bombList, boxEr, htmlElement);
   });
+
 }
 
 
 //END GAME FUNCTION
-function endGame(htmlElement, boxEr , bombList){
-  htmlElement.classList.add('pe-none');
+function endGame(bombList, boxEr, htmlElement){
   
   if(bombList.includes(boxEr.iD)){
-    boxEr.classList.add('bomb');
-    console.log('rossi', boxEr);
-  }else{
-    boxEr.classList.add('check');
-    console.log('azzurri', boxEr);
-  }
-  
 
+    boxEr.classList.add('bomb');
+    boxEr.innerHTML = 'Boom!';
+    htmlElement.classList.add('pe-none');
+    layoverMessage.classList.add('block');
+    outputMessage.innerHTML = `Hai perso con ${clickCounter} click!!!`
+  }else{
+
+    boxEr.classList.add('check');
+  }
 
 }
 
@@ -170,4 +156,6 @@ function uniqueRandomNum( number, boxNumber ){
 function randomNum( min , max ){
   return Math.floor(Math.random() * (max - min +1) + min);
 }
+
+// var audio = new Audio('sound/lose.wav');   audio.play();
 
