@@ -1,8 +1,8 @@
 
 /* header */
 .sd-header{
-  height: 90px;
-  background-color: aliceblue;
+  height: 100px;
+  background-color: rgb(211, 186, 248);
 }
 
 .sd-header .row{
@@ -20,7 +20,7 @@
 
 /* main */
 #sd-main{
-  min-height: calc( 100vh - 240px);
+  min-height: calc( 100vh - 230px);
   background-color: cadetblue;
   position: relative;
   color: aliceblue;
@@ -75,13 +75,10 @@
 }
 
 /* footer */
-footer{
-  height: 100px;
-  background-color: aliceblue;
-}
 
-.sd-footer{
-  height: 100%;
+footer{
+  height: 130px;
+  background-color: rgb(211, 186, 248);
 }
 
 /* instruction */
@@ -89,7 +86,7 @@ footer{
   transform: scale(1.4);
 }
 
-footer h3::after{
+footer h4::after{
   content: ' ';
   display: inline-block;
   width: 50px;
