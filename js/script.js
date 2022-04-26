@@ -1,8 +1,8 @@
 
 const totBomb = 16;
 let clickCounter = 0;
-let containerBombNum =[];
-let elementBombList = [];
+let CONTAINER_BOMB_NUM =[];
+let LIST_BOMB_ELEMENT = [];
 
 const outputMessage = document.getElementById('output-counter');
 const main = document.getElementById('sd-main');
@@ -15,7 +15,7 @@ document.getElementById('btn-start').addEventListener( 'click', initGame );
 function initGame(){
 
   main.innerHTML = '';
-  containerBombNum =[];
+  CONTAINER_BOMB_NUM =[];
   clickCounter = 0;
 
   const levelChoice = document.getElementById('level-choice').value;
@@ -63,7 +63,7 @@ function createGameArea( boxNumber ){
     checkBomb( bombList, boxEr , htmlElement , boxNumber );
 
     if(bombList.includes(boxEr.iD)){
-      elementBombList.push(boxEr);
+      LIST_BOMB_ELEMENT.push(boxEr);
     }
   }
 
@@ -125,9 +125,9 @@ function endGame( bombList, boxEr, htmlElement, clickCounter, boxNumber ){
 
     btnStart.innerHTML = 'Ritenta!'
 
-    for(let i = 0; i < elementBombList.length ; i++ ){
-      elementBombList[i].classList.add('bomb');
-      elementBombList[i].innerHTML = 'Boom!';
+    for(let i = 0; i < LIST_BOMB_ELEMENT.length ; i++ ){
+      LIST_BOMB_ELEMENT[i].classList.add('bomb');
+      LIST_BOMB_ELEMENT[i].innerHTML = 'Boom!';
     }
 
   }else{
@@ -190,15 +190,15 @@ function uniqueRandomNum( number, boxNumber ){
     while(!check){
       estractNumber = randomNum(1, boxNumber);
 
-      if(!containerBombNum.includes(estractNumber)){
+      if(!CONTAINER_BOMB_NUM.includes(estractNumber)){
         check = true;
-        containerBombNum.push(estractNumber);
+        CONTAINER_BOMB_NUM.push(estractNumber);
         selected = estractNumber;
       }
     }
   
   }
-  return containerBombNum;
+  return CONTAINER_BOMB_NUM;
 
 }
 
