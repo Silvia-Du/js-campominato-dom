@@ -56,7 +56,7 @@
 .sd-box.bomb{
   background-color: rgb(241, 137, 0);
   color: rgb(218, 15, 123);
-  background-image: url(../img-bomb.png);
+  background-image: url(../img/img-bomb.png);
   background-size: cover;
   background-position: center;
   
@@ -93,7 +93,7 @@ footer h4::after{
   height: 50px;
   margin-left: 10px;
   vertical-align: middle;
-  background-image: url(../img-bomb.png);
+  background-image: url(../img/img-bomb.png);
   background-position: center;
   background-size: cover;
 }
